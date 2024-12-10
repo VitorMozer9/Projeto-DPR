@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, uMessageUtil;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, uMessageUtil,Controller.ProjetoDPR;
 
 type
   TfrmDPRView = class(TForm)
@@ -21,13 +21,14 @@ type
     procedure Button3Click(Sender: TObject);
     procedure btnLimparClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure btnInserirClick(Sender: TObject);
   private
     { Private declarations }
     vKey : Word;
 
   function ValidaCampos : Boolean;
 
-  procedure ProcessInsercao;
+  function ProcessaInsercao : Boolean;
   procedure LimpaTela;
 
   public
@@ -43,9 +44,14 @@ implementation
 
 { TfrmDPRView }
 
+procedure TfrmDPRView.btnInserirClick(Sender: TObject);
+begin
+   ProcessaInsercao;
+end;
+
 procedure TfrmDPRView.btnLimparClick(Sender: TObject);
 begin
-  LimpaTela;
+   LimpaTela;
 end;
 
 procedure TfrmDPRView.Button3Click(Sender: TObject);
@@ -103,21 +109,37 @@ begin
    end;
 end;
 
-procedure TfrmDPRView.ProcessInsercao;
+function TfrmDPRView.ProcessaInsercao : Boolean;
+var
+   xUnitPrincipal : string;
 begin
-  //Inserção
+   //Inserção
+   xUnitPrincipal := '';
+   Result := False;
+
+   xUnitPrincipal :=
+    TProjetoDPRController.getInstancia.EncontraUnitPrincipal('C:\Projeto DPR D11.3\View');
+
+   if (xUnitPrincipal.Trim <> EmptyStr) then
+   begin
+      TProjetoDPRController.getInstancia.VerificaTexto(xUnitPrincipal, edtModulo.Text, edtCaminho.Text);
+      ShowMessage('Dados inseridos com sucesso!');
+      Result := true;
+      exit;
+   end;
+
 end;
 
 function TfrmDPRView.ValidaCampos: Boolean;
 begin
-  Result := False;
+   Result := False;
 
    if (edtModulo.Text = EmptyStr) then
    begin
       TMessageUtil.Alerta('O Módulo a ser inserido não pode ficar em branco.');
       if (edtModulo.CanFocus) then
          edtModulo.SetFocus;
-      Exit;
+      exit;
    end;
 
    if (edtCaminho.Text = EmptyStr) then
@@ -125,7 +147,7 @@ begin
       TMessageUtil.Alerta('O caminho a ser inserido não pode ficar em branco.');
       if (edtCaminho.CanFocus) then
          edtCaminho.SetFocus;
-      Exit;
+      exit;
    end;
 
    Result := True;

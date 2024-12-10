@@ -1,4 +1,6 @@
-program DPR;
+program DPR,
+testes in teste12,
+testes in teste12;
 
 uses
   Vcl.Forms,

@@ -98,9 +98,8 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="View.ProjetoDPR.pas">
+        <DCCReference Include="View\View.ProjetoDPR.pas">
             <Form>frmDPRView</Form>
-            <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Controller\Controller.ProjetoDPR.pas"/>
         <BuildConfiguration Include="Base">

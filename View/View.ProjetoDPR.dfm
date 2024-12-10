@@ -22,7 +22,8 @@ object frmDPRView: TfrmDPRView
     Height = 50
     Align = alBottom
     TabOrder = 0
-    ExplicitTop = 160
+    ExplicitTop = 146
+    ExplicitWidth = 516
     object btnInserir: TButton
       Left = 248
       Top = 14
@@ -30,6 +31,7 @@ object frmDPRView: TfrmDPRView
       Height = 25
       Caption = '&Inserir'
       TabOrder = 0
+      OnClick = btnInserirClick
     end
     object btnLimpar: TButton
       Left = 336
@@ -57,13 +59,11 @@ object frmDPRView: TfrmDPRView
     Height = 147
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 264
-    ExplicitTop = 48
-    ExplicitWidth = 185
-    ExplicitHeight = 41
+    ExplicitWidth = 516
+    ExplicitHeight = 146
     object lblModulo: TLabel
-      Left = 5
-      Top = 47
+      Left = 4
+      Top = 37
       Width = 137
       Height = 15
       Caption = 'Digite o nome do m'#243'dulo'
@@ -77,7 +77,7 @@ object frmDPRView: TfrmDPRView
     end
     object edtModulo: TEdit
       Left = 147
-      Top = 38
+      Top = 29
       Width = 345
       Height = 23
       TabOrder = 0
